@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+<head>
+  <title>JS Benchmark</title>
+  <link rel="stylesheet" href="benchmark.css" type="text/css"/>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+  <script type="text/javascript" src="tpl.js"></script>
+  <script type="text/javascript" src="benchmark.js"></script>
+</head>
+<body>
+<div class="results"></div>
+<input type="button" value="Run benchmarks" id="run_benchmarks"/>
+
+<script type="text/javascript">
+  var textureHeight = 256;
+  var textureWidth = 256;
+
+  var benchmarks = [
+    "(((Math.floor(_benchmarkVar) + 1024 * textureHeight) % textureHeight) * textureWidth + ((Math.floor(_benchmarkVar) + 1024 * textureWidth) % textureWidth )) << 2;",
+    "(((Math.floor(_benchmarkVar) + 1024 * 256) % textureHeight) * 256 + ((Math.floor(_benchmarkVar) + 1024 * 256) % textureWidth )) << 2;",
+    "(((Math.floor(_benchmarkVar) + 1024 * 256) % 256) * 256 + ((Math.floor(_benchmarkVar) + 1024 * 256) % 256 )) << 2;",
+    "(((Math.floor(_benchmarkVar) + 1024 << 8) % 256) << 8 + ((Math.floor(_benchmarkVar) + 1024 << 8 ) % 256 )) << 2;",
+    "(((Math.floor(_benchmarkVar) + 262144) & 0xff) << 8 + ((Math.floor(_benchmarkVar) + 262144) & 0xff )) << 2;"
+  ];
+
+  var benchmark = new Benchmark(200000);
+  
+$(function() {
+	$('#run_benchmarks').click(function() {
+		var results = benchmark.runAll(benchmarks);
+		benchmark.renderRows(results, $('.results'));
+	});
+});
+</script>
+</body>
+</html>

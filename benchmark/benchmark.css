@@ -1,0 +1,52 @@
+body {
+	font-family: sans-serif;
+	font-size: 9pt;
+	background-color: rgb(210,210,210);
+	margin: 0em;
+	padding: 1em;
+}
+
+input[type=button] {
+	-moz-border-radius: 4px;
+	border: none;
+	background-color: green;
+	padding: 0.5em;
+	margin: 0.5em;
+	font-weight: bold;
+	color: rgb(244,244,244);
+}
+
+.results {
+}
+
+.results .result {
+	border: 1px solid rgb(163,163,163);
+	background-color: rgb(244,244,244);
+	-moz-border-radius: 6px;
+	padding: 0.5em;
+	margin: 0.5em;
+	display: inline-block;
+}
+
+.results .result .implementation,.single {
+	display: inline-block;
+	padding: 0.3em;
+	vertical-align: top;
+}
+
+.results .result .implementation {
+	font-family: courier;
+	font-size: 11pt;
+	width: 50em;
+}
+
+.results .result .single {
+	font-weight: bold;
+	font-size: 18pt;
+	width: 4em;
+	text-align: right;
+	border: 1px solid rgb(163,163,163);
+	background-color: white;
+	-moz-border-radius: 6px;
+	margin-left: 1em;
+}
