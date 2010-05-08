@@ -72,7 +72,7 @@ var Rotozoom = {
       var y = startY;
       var w = width;
       while (w--) {
-        pos = (((Math.floor(y) + 262144) & 0xff) << 8 + ((Math.floor(y) + 262144) & 0xff )) << 2;
+        pos = ((((Math.floor(y) + 262144) & 0xff) << 8) + ((Math.floor(x) + 262144) & 0xff )) << 2;
         frame[i++] = texture[pos++];
         frame[i++] = texture[pos++];
         frame[i++] = texture[pos];

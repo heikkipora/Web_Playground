@@ -19,8 +19,8 @@
     "(((Math.floor(_benchmarkVar) + 1024 * textureHeight) % textureHeight) * textureWidth + ((Math.floor(_benchmarkVar) + 1024 * textureWidth) % textureWidth )) << 2;",
     "(((Math.floor(_benchmarkVar) + 1024 * 256) % textureHeight) * 256 + ((Math.floor(_benchmarkVar) + 1024 * 256) % textureWidth )) << 2;",
     "(((Math.floor(_benchmarkVar) + 1024 * 256) % 256) * 256 + ((Math.floor(_benchmarkVar) + 1024 * 256) % 256 )) << 2;",
-    "(((Math.floor(_benchmarkVar) + 1024 << 8) % 256) << 8 + ((Math.floor(_benchmarkVar) + 1024 << 8 ) % 256 )) << 2;",
-    "(((Math.floor(_benchmarkVar) + 262144) & 0xff) << 8 + ((Math.floor(_benchmarkVar) + 262144) & 0xff )) << 2;"
+    "((((Math.floor(_benchmarkVar) + 1024 << 8) % 256) << 8) + ((Math.floor(_benchmarkVar) + 1024 << 8 ) % 256 )) << 2;",
+    "((((Math.floor(_benchmarkVar) + 262144) & 0xff) << 8) + ((Math.floor(_benchmarkVar) + 262144) & 0xff )) << 2;"
   ];
 
   var benchmark = new Benchmark(200000);
