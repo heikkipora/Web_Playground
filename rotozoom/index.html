@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+<head>
+  <title>HTML5 Canvas Demo</title>
+  <link rel="stylesheet" href="rotozoom.css" type="text/css"/>
+  <script type="text/javascript" src="rotozoom.js"></script>
+</head>
+<body>
+<div class="content">
+    <canvas id="demoCanvas" width="640" height="480">
+        Your browser does not support the Canvas element, please upgrade.
+    </canvas>
+    <div class="overlay">
+        <h1>rotozoom-js</h1>
+    </div>
+</div>
+<!-- <audio src="Its_a_fine_day.ogg" autoplay="autoplay">
+  Your browser does not support the Audio element, please upgrade.
+</audio> -->
+<script type="text/javascript">
+  self.addEventListener('load', function () { Rotozoom.init(); }, false);
+</script>
+
+</body>
+</html>
