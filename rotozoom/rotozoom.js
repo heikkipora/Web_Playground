@@ -54,8 +54,6 @@ var Rotozoom = {
     var texture = Rotozoom.texture.frameBuffer;
     var pos;
     
-    var textureWidth = 256;
-    var textureHeight = 256;
     var startY = 400 + Math.sin(timestamp/2.4) * 800;
     var startX = 500 + Math.cos(timestamp/2.4) * 500;
     var i = 0;
@@ -74,7 +72,7 @@ var Rotozoom = {
       var y = startY;
       var w = width;
       while (w--) {
-        pos = (((Math.floor(y) + 1024 * textureHeight) % textureHeight) * textureWidth + ((Math.floor(x) + 1024 * textureWidth) % textureWidth )) << 2;
+        pos = (((Math.floor(y) + 262144) & 0xff) << 8 + ((Math.floor(y) + 262144) & 0xff )) << 2;
         frame[i++] = texture[pos++];
         frame[i++] = texture[pos++];
         frame[i++] = texture[pos];
