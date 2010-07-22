@@ -1,0 +1,4 @@
+Polarmap is a JS/HTML5 implementation of the classic bitmap "polarmap"-effect seen in oldskool demos.
+Tested with Mac Firefox v3.6+ and Mac Safari v5 only.
+
+Needs to be loaded from a web server in order to run. Firefox thinks that file:// URLs are too dangerous for allowing image manipulation on files loaded from them :)
