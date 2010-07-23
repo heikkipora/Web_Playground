@@ -8,7 +8,7 @@ body {
   margin: 40px auto;
 }
 
-canvas {
+#demoCanvas {
   border: 1px solid rgb(128,128,128);
   width: 640px;
   height: 480px;

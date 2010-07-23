@@ -24,8 +24,8 @@ var Polarmap = {
 	base_radius : 400.0,
 	width : 320,
 	height : 240,
-	image_width : 256,
-	image_height : 256,
+	image_width : 512,
+	image_height : 512,
 	table : [],
 	shade : []
 	},
@@ -33,23 +33,24 @@ var Polarmap = {
   precalc : function(map) {
 	for(var i = 0; i < map.width * map.height; i++) { map.table[i] = 0; map.shade[i] = 0; };
 
-	var image_xdelta = (map.image_width * 4) / (Math.PI * 2);
-	var image_ydelta = (map.image_height * 4) / map.dist_max;
+	var image_xdelta = (map.image_width * 2) / (Math.PI * 2);
+	var image_ydelta = (map.image_height * 2) / map.dist_max;
+	var xCenter = map.width / 2;
+	var yCenter = map.height / 2;
 
 	for(var dist = map.dist_max; dist > map.dist_min; dist -= map.dist_step) {
-		for(var angle = 0.0; angle < Math.PI * 2; angle += map.angle_step) {
+		for(var angle = Math.PI * 2; angle > 0; angle -= map.angle_step) {
 			// flower tunnel
-			var radius = ( Math.cos( angle * 4.0 ) + 1.0 ) * map.base_radius / 4.0  + map.base_radius / 2.0;
+			var radius = ( Math.cos( angle * 4.0 ) + 1.0 ) * map.base_radius / 6.0  + map.base_radius / 2.0;
 			//	basic, round, tunnel
 			//var radius = map.base_radius / 2.0;
 			radius = radius / dist;
-			var x = Math.floor(Math.cos(angle) * radius) + map.width / 2;
-			var y = Math.floor(Math.sin(angle) * radius) + map.height / 2;
+			var x = Math.floor(Math.cos(angle) * radius * 1.2) + xCenter;
+			var y = Math.floor(Math.sin(angle) * radius) + yCenter;
 
 			if( (x >= 0) && (x < map.width) && (y >= 0) && (y < map.height) ) {  
 				map.table[y * map.width + x] = (Math.floor(image_ydelta * dist) % map.image_height) * map.image_width + (Math.floor(image_xdelta * angle) % map.image_width);
-				var s = Math.floor( dist / map.dist_max * 255.0 );
-				map.shade[y * map.width + x] = 255 - s;
+				map.shade[y * map.width + x] = 255 - Math.floor( dist / map.dist_max * 255.0 );
 				}
 	  		}
 		}
@@ -59,7 +60,7 @@ var Polarmap = {
     if(Polarmap.texture.frameBuffer == undefined) return;
 
     var timestamp = new Date().getTime();
-    timestamp = Math.floor(timestamp / 8);
+    timestamp = Math.floor(timestamp / 4);
     
     var texture = Polarmap.texture.frameBuffer;
     var map = Polarmap.map_2;
@@ -70,7 +71,7 @@ var Polarmap = {
       var w = width;
       while (w--) {
 		var texel = map.table[h * map.width + w];
-		var texel = ((texel + timestamp * 256) & 0xffff ) << 2
+		texel = ((texel + timestamp * 512) & 0x3ffff ) << 2;
         frame[i++] = texture[texel++];
         frame[i++] = texture[texel++];
         frame[i++] = texture[texel];
@@ -81,8 +82,9 @@ var Polarmap = {
   
   init : function() {
 	Polarmap.precalc(Polarmap.map_2);
+    var textureCanvas = document.getElementById('textureCanvas');
+    this.texture = new Imagebuffer( textureCanvas, "texture.png", 512, 512 );
     var canvas = document.getElementById('demoCanvas');
-    this.texture = new Imagebuffer( canvas, "texture.jpg", 256, 256 );
     this.fb = new Framebuffer( canvas );
     self.setInterval( 'Polarmap.tick()', 50 );
   },
