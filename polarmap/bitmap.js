@@ -13,16 +13,10 @@ function completeImageBuferConstruction(image, self, width, height) {
     self.frameBuffer = self.imgData.data;
 };
 
-Imagebuffer.prototype.getBuffer = function() {
-    return this.frameBuffer;
-};
-
-Imagebuffer.prototype.getWidth = function() {
-    return this.imgData.width;
-};
-
-Framebuffer.prototype.getHeight = function() {
-    return this.imgData.height;
+Imagebuffer.prototype = {
+	getBuffer : function() { return this.frameBuffer; },
+	getWidth : function() { return this.imgData.width },
+	getHeight : function() { return this.imgData.height; }
 };
 
 function Framebuffer(canvasElement) {
@@ -31,15 +25,11 @@ function Framebuffer(canvasElement) {
     this.frameBuffer = this.imgData.data;
 };
 
-Framebuffer.prototype.render = function(renderFunction) {
-    renderFunction(this.frameBuffer, this.imgData.width, this.imgData.height);
-    this.context.putImageData(this.imgData, 0, 0);
-};
-
-Framebuffer.prototype.getWidth = function() {
-    return this.imgData.width;
-};
-
-Framebuffer.prototype.getHeight = function() {
-    return this.imgData.height;
+Framebuffer.prototype = {
+	render : function(renderFunction) {
+    	renderFunction(this.frameBuffer, this.imgData.width, this.imgData.height);
+    	this.context.putImageData(this.imgData, 0, 0);
+	},
+	getWidth : function() { return this.imgData.width; },
+	getHeight : function() { return this.imgData.height; }
 };
