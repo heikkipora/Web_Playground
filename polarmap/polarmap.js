@@ -20,10 +20,10 @@ var Polarmap = {
 	dist_min : 0.5,
 	dist_max : 4.5,
 	dist_step : 0.001,
-	angle_step : 0.005,
-	base_radius : 400.0,
-	width : 320,
-	height : 240,
+	angle_step : 0.002,
+	base_radius : 500.0,
+	width : 640,
+	height : 480,
 	image_width : 512,
 	image_height : 512,
 	table : [],
@@ -65,17 +65,21 @@ var Polarmap = {
     var texture = Polarmap.texture.frameBuffer;
     var map = Polarmap.map_2;
 
+	var offsetX = Math.floor(Math.cos(timestamp / 420) * map.width / 4 + map.width / 4);
+	var offsetY = Math.floor(Math.sin(timestamp / 300) * map.height / 6 + map.width / 4);
+
     var i = 0;
     var h = height;
     while (h--) {
       var w = width;
       while (w--) {
-		var texel = map.table[h * map.width + w];
+		var lut = (h + offsetY) * map.width + w + offsetX;
+		var texel = map.table[lut];
 		texel = ((texel + timestamp * 512) & 0x3ffff ) << 2;
         frame[i++] = texture[texel++];
         frame[i++] = texture[texel++];
         frame[i++] = texture[texel];
-        frame[i++] = map.shade[h * map.width + w];
+        frame[i++] = map.shade[lut];
       }
     }
   },
